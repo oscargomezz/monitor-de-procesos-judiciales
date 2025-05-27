@@ -4,7 +4,7 @@ import { SearchBar } from './components/SearchBar';
 import { ProcessCard } from './components/ProcessCard';
 import { ProcessDetails } from './components/ProcessDetails';
 import { LoadingSpinner } from './components/LoadingSpinner';
-import { JudicialAction, Process, SearchQuery, UrgencyLevel, ClassificationResponse } from './types';
+import { JudicialAction, Process, SearchQuery, UrgencyLevel } from './types';
 import { fetchProcesses as apiFetchProcesses } from './services/judicialApiService';
 import { summarizeText, classifyActionUrgency } from './services/geminiService';
 import { LOCAL_STORAGE_KEY } from './constants';
