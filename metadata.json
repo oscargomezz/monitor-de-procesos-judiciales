@@ -1,0 +1,5 @@
+{
+  "name": "Monitor de Procesos Judiciales",
+  "description": "Aplicación para consultar, seguir y analizar procesos judiciales en Colombia, utilizando IA para resumir y clasificar actuaciones.",
+  "requestFramePermissions": []
+}
