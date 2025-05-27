@@ -2,39 +2,35 @@ import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// Solución para los plugins de PostCSS
+const postcssPlugins = {
+  tailwindcss: require('tailwindcss'),
+  autoprefixer: require('autoprefixer')
+};
+
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, '.', '');
+  const env = loadEnv(mode, process.cwd(), '');
   
   return {
     plugins: [react()],
-    
-    // Configuración esencial para GitHub Pages
     base: '/monitor-de-procesos-judiciales/',
-    
-    // Configuración de build
-    build: {
-      outDir: 'dist',
-      emptyOutDir: true,
-      sourcemap: mode !== 'production'
-    },
-    
-    // Resolución de alias 
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      }
-    },
-    
-    // Variables de entorno 
-    define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-    },
-    
-    // Configuración opcional para CSS/Tailwind
     css: {
       postcss: {
-        plugins: [require('tailwindcss'), require('autoprefixer')]
+        plugins: [
+          postcssPlugins.tailwindcss,
+          postcssPlugins.autoprefixer
+        ]
+      }
+    },
+    define: {
+      'process.env': {
+        API_KEY: JSON.stringify(env.GEMINI_API_KEY),
+        GEMINI_API_KEY: JSON.stringify(env.GEMINI_API_KEY)
+      }
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src')
       }
     }
   };
